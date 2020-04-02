@@ -20,3 +20,6 @@ https://corona.lmao.ninja/countries
 ## Hosting
 
 This site exists as both a Github page and is hosted on Netlify.
+
+[Github Page](https://jean-oikonomou.github.io/COVID-19_MAP-Leaflet-Gatsby/) 
+[Netlify Page](https://vibrant-volhard-9c30de.netlify.com/)

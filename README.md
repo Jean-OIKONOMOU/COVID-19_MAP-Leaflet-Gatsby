@@ -2,6 +2,8 @@
 
 Jumpstart your next Gatsby mapping project with Leaflet!
 
+This is a map of the world detailing every change in the COVID-19 pandemic. Zoom in on any country and tap the dots to get more information.
+
 ## What This Includes
 * [Yarn](https://yarnpkg.com/en/)
 * [Gatsby](https://www.gatsbyjs.org/)
@@ -11,34 +13,10 @@ Jumpstart your next Gatsby mapping project with Leaflet!
 * [Leaflet](https://leafletjs.com/)
 * [React Leaflet](https://react-leaflet.js.org)
 
-# Getting Started
+## API for the coronavirus
 
-## Requirements
-* [Gatsby CLI](https://www.npmjs.com/package/gatsby-cli)
-* [Yarn](https://yarnpkg.com/en/)
+https://corona.lmao.ninja/countries
 
-## Quick Start
-Run the following in your favorite terminal:
-```
-gatsby new [directory] https://github.com/colbyfayock/gatsby-starter-leaflet
-```
+## Hosting
 
-## Starting from Scratch
-* Set up Yarn: https://yarnpkg.com/lang/en/docs/install/#mac-stable)[https://yarnpkg.com/lang/en/docs/install/
-* Install the Gatsby CLI globally:
-```
-yarn global add gatsby-cli
-```
-* Inside the directory of your choice, scaffold a new Gatsby site:
-```
-gatsby new [directory] https://github.com/colbyfayock/gatsby-starter-leaflet
-```
-For example, if I want my installation in `~/Code/new-gatsby-site`, I would navigate to `~/Code` and run:
-```
-gatsby new new-gatsby-site https://github.com/colbyfayock/gatsby-starter-leaflet
-```
-* Navigate to your new directory and run:
-```
-yarn develop
-```
-* You should now be running a new Gatsby site locally! 🎉
+This site exists as both a Github page and is hosted on Netlify.

@@ -9,11 +9,11 @@ import Map from 'components/Map';
 
 
 const LOCATION = {
-  lat: 38.9072,
-  lng: -77.0369
+  lat: 35,
+  lng: 0
 };
 const CENTER = [LOCATION.lat, LOCATION.lng];
-const DEFAULT_ZOOM = 2;
+const DEFAULT_ZOOM = 3;
 
 
 const IndexPage = () => {
@@ -30,9 +30,92 @@ const IndexPage = () => {
     let response;
 
     try {
-      response = await axios.get('');
-    } catch(e)
+      response = await axios.get('https://corona.lmao.ninja/countries');
+    } catch(e) {
+      console.log('E', e);
+      return;
+    }
 
+    const { data } = response;
+    const hasData = Array.isArray(data) && data.length > 0;
+
+    if ( !hasData ) return;
+
+    const geoJson = {
+      type: 'FeatureCollection',
+      features: data.map((country = {}) => {
+        const { countryInfo = {} } = country;
+        const { lat, long: lng } = countryInfo;
+        return {
+          type: 'Feature',
+          properties: {
+            ...country,
+          },
+          geometry: {
+            type: 'Point',
+            coordinates: [ lng, lat ]
+          }
+        }
+      })
+    }
+
+    function countryPointToLayer (feature = {}, latlng) {
+      const { properties = {} } = feature;
+      let updatedFormatted;
+      let casesString;
+
+      const {
+        country,
+        updated,
+        cases,
+        deaths,
+        todayCases,
+        todayDeaths,        
+        recovered,
+        active
+      } = properties
+
+      casesString = `${cases}`;
+
+      if ( cases > 1000 ) {
+        casesString = `${casesString.slice(0, -3)}k+`
+      }
+
+      if ( updated ) {
+        updatedFormatted = new Date(updated).toLocaleString();
+      }
+
+      const html = `
+        <span class="icon-marker">
+          <span class="icon-marker-tooltip">
+            <h2>${country}</h2>
+            <ul>
+              <li><strong>Total Cases;</strong> ${cases}</li>
+              <li><strong>Total Deaths;</strong> ${deaths}</li>
+              <li><strong>Cases Today;</strong> ${todayCases}</li>
+              <li><strong>Deaths Today;</strong> ${todayDeaths}</li>
+              <li><strong>Recovered;</strong> ${recovered}</li>
+              <li><strong>Still Infected;</strong> ${active}</li>
+              <li><strong>Last Updated;</strong> ${updatedFormatted}</li>
+            </ul>
+          </span>
+          <h2>${ casesString }</h2>
+        </span>
+      `;
+
+      return L.marker( latlng, {
+        icon: L.divIcon({
+          className: 'icon',
+          html
+        }),
+        riseOnHover: true
+      });
+    }
+
+    const geoJsonLayers = new L.GeoJSON(geoJson, {
+      pointToLayer: countryPointToLayer
+    });
+    geoJsonLayers.addTo(map);
   }
 
   const mapSettings = {

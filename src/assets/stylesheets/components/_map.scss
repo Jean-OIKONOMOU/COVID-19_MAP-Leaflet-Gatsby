@@ -52,11 +52,15 @@
 
     }
     @media(hover: hover) and (pointer: fine) {
-        .icon-marker-tooltip {
-            display: block;
+        &:hover {
+
+            .icon-marker-tooltip {
+                display: block;
+            }
+    
         }
     }
-    
+
     &:focus {
 
         .icon-marker-tooltip {

@@ -52,6 +52,14 @@
 
     }
 
+    &:focus {
+
+        .icon-marker-tooltip {
+            display: block;
+        }
+
+    }
+
 }
 
 .icon-marker-tooltip {
